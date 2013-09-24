@@ -1,0 +1,15 @@
+@(field: play.api.data.Field, args: (Symbol,Any)*)(implicit lang: play.api.i18n.Lang)
+
+@import play.api.i18n._
+@import views.html.helper._
+
+@elements = @{ new FieldElements(field.id, field, null, args.toMap, lang) }
+
+<div class="control-group">
+  <label class="control-label" for="@field.name">@elements.args.get('_label)</label>
+  <div class="controls">
+      <input type="text" name="@field.name" id="@field.id" value="@field.value">
+      <span class="help-inline">@elements.errors(elements.lang).mkString(", ")</span>
+      <span class="help-inline">@elements.infos(elements.lang).mkString(", ")</span> 
+  </div>
+</div>

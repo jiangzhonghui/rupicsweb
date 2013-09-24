@@ -1,0 +1,222 @@
+@(hash: String, form: Form[Application.Login])
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>乳此动人</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Log in for PIC Browser">
+	<meta name="author" content="Vencent Karl">
+
+	<!-- The styles -->
+	<link href="@routes.Assets.at("css/bootstrap-cerulean.css")" rel="stylesheet">
+	<style type="text/css">
+	  body {
+		padding-bottom: 40px;
+	  }
+	  .sidebar-nav {
+		padding: 9px 0;
+	  }
+	</style>
+	<link href="@routes.Assets.at("css/bootstrap-responsive.css")" rel="stylesheet">
+	<link href="@routes.Assets.at("css/charisma-app.css")" rel="stylesheet">
+	<link href="@routes.Assets.at("css/jquery-ui-1.8.21.custom.css")" rel="stylesheet">
+	<link href="@routes.Assets.at("css/fullcalendar.css")" rel="stylesheet">
+	<link href="@routes.Assets.at("css/fullcalendar.print.css")" rel="stylesheet"  media="print">
+	<link href="@routes.Assets.at("css/chosen.css")" rel="stylesheet">
+	<link href="@routes.Assets.at("css/uniform.default.css")" rel="stylesheet">
+	<link href="@routes.Assets.at("css/colorbox.css")" rel="stylesheet">
+	<link href="@routes.Assets.at("css/jquery.cleditor.css")" rel="stylesheet">
+	<link href="@routes.Assets.at("css/jquery.noty.css")" rel="stylesheet">
+	<link href="@routes.Assets.at("css/noty_theme_default.css")" rel="stylesheet">
+	<link href="@routes.Assets.at("css/elfinder.min.css")" rel="stylesheet">
+	<link href="@routes.Assets.at("css/elfinder.theme.css")" rel="stylesheet">
+	<link href="@routes.Assets.at("css/jquery.iphone.toggle.css")" rel="stylesheet">
+	<link href="@routes.Assets.at("css/opa-icons.css")" rel="stylesheet">
+	<link href="@routes.Assets.at("css/uploadify.css")" rel="stylesheet">
+
+	<!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+	  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+	<!-- The fav icon -->
+	<link rel="shortcut icon" href="img/favicon.ico">
+		
+</head>
+
+<body>
+		<div class="container-fluid">
+		<div class="span6 center well">
+			<div class="row-fluid">
+				<div class="span12 center login-header">
+					<h2>欢迎使用乳此动人</h2>
+				</div><!--/span-->
+			</div><!--/row-->
+			<ul class="nav nav-tabs" id="myTab">
+							<li class="active"><a href="#qrcode">QRCode登陆</a></li>
+							<li><a href="#common">一般登陆</a></li>
+						</ul>
+						 
+						<div id="myTabContent" class="tab-content">
+							<div class="tab-pane active" id="qrcode">
+							<div id="onError" class="alert-message error">
+		    </div>
+			
+			<div class="row-fluid">
+				<image class="charisma_qr center" src="@routes.Application.qrcode(hash)"><!--/span-->
+			</div><!--/row-->
+							</div>
+							<div class="tab-pane" id="common">
+								<div class="row-fluid">
+				<div class="well span12 center login-box">
+					<div class="alert alert-info">
+						请输入用户名密码登陆.
+					</div>
+					 @helper.form(routes.Application.authenticate(null), 'class -> "form-horizontal") {
+					 
+					 @if(form.hasGlobalErrors) { 
+                <p class="error">
+                    @form.globalError.message
+                </p>
+            }
+            
+            @if(flash.contains("success")) {
+                <p class="success">
+                    @flash.get("success")
+                </p>
+            }
+						<fieldset>
+							<div class="input-prepend" title="Username" data-rel="tooltip">
+								<span class="add-on"><i class="icon-user"></i></span><input autofocus class="input-large span10" name="email" id="email" type="text" value="@form("email").value" />
+							</div>
+							<div class="clearfix"></div>
+
+							<div class="input-prepend" title="Password" data-rel="tooltip">
+								<span class="add-on"><i class="icon-lock"></i></span><input class="input-large span10" name="password" id="password" type="password" value="" />
+							</div>
+							<div class="clearfix"></div>
+
+							<div class="input-prepend">
+							<label class="remember" for="remember"><input type="checkbox" id="remember" />记住我</label>
+							</div>
+							<div class="clearfix"></div>
+
+							<p class="center span5">
+							<button type="submit" class="btn btn-primary">登陆</button>
+							</p>
+						</fieldset>
+					}
+				</div><!--/span-->
+			</div><!--/row-->
+							</div>
+						</div>
+			
+			
+			
+				</div><!--/fluid-row-->
+		
+	</div><!--/.fluid-container-->
+
+	<!-- external javascript
+	================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+
+	<!-- jQuery -->
+	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.1.1.min.js"></script>
+	<!-- jQuery UI -->
+	<script src="@routes.Assets.at("js/jquery-ui-1.8.21.custom.min.js")"></script>
+	<!-- transition / effect library -->
+	<script src="@routes.Assets.at("js/bootstrap-transition.js")"></script>
+	<!-- alert enhancer library -->
+	<script src="@routes.Assets.at("js/bootstrap-alert.js")"></script>
+	<!-- modal / dialog library -->
+	<script src="@routes.Assets.at("js/bootstrap-modal.js")"></script>
+	<!-- custom dropdown library -->
+	<script src="@routes.Assets.at("js/bootstrap-dropdown.js")"></script>
+	<!-- scrolspy library -->
+	<script src="@routes.Assets.at("js/bootstrap-scrollspy.js")"></script>
+	<!-- library for creating tabs -->
+	<script src="@routes.Assets.at("js/bootstrap-tab.js")"></script>
+	<!-- library for advanced tooltip -->
+	<script src="@routes.Assets.at("js/bootstrap-tooltip.js")"></script>
+	<!-- popover effect library -->
+	<script src="@routes.Assets.at("js/bootstrap-popover.js")"></script>
+	<!-- button enhancer library -->
+	<script src="@routes.Assets.at("js/bootstrap-button.js")"></script>
+	<!-- accordion library (optional, not used in demo) -->
+	<script src="@routes.Assets.at("js/bootstrap-collapse.js")"></script>
+	<!-- carousel slideshow library (optional, not used in demo) -->
+	<script src="@routes.Assets.at("js/bootstrap-carousel.js")"></script>
+	<!-- autocomplete library -->
+	<script src="@routes.Assets.at("js/bootstrap-typeahead.js")"></script>
+	<!-- tour library -->
+	<script src="@routes.Assets.at("js/bootstrap-tour.js")"></script>
+	<!-- library for cookie management -->
+	<script src="@routes.Assets.at("js/jquery.cookie.js")"></script>
+	<!-- calander plugin -->
+	<script src="@routes.Assets.at("js/fullcalendar.min.js")"></script>
+	<!-- data table plugin -->
+	<script src="@routes.Assets.at("js/jquery.dataTables.min.js")"></script>
+
+	<!-- chart libraries start -->
+	<script src="@routes.Assets.at("js/excanvas.js")"></script>
+	<script src="@routes.Assets.at("js/jquery.flot.min.js")"></script>
+	<script src="@routes.Assets.at("js/jquery.flot.pie.min.js")"></script>
+	<script src="@routes.Assets.at("js/jquery.flot.stack.js")"></script>
+	<script src="@routes.Assets.at("js/jquery.flot.resize.min.js")"></script>
+	<!-- chart libraries end -->
+
+	<!-- select or dropdown enhancer -->
+	<script src="@routes.Assets.at("js/jquery.chosen.min.js")"></script>
+	<!-- checkbox, radio, and file input styler -->
+	<script src="@routes.Assets.at("js/jquery.uniform.min.js")"></script>
+	<!-- plugin for gallery image view -->
+	<script src="@routes.Assets.at("js/jquery.colorbox.min.js")"></script>
+	<!-- rich text editor library -->
+	<script src="@routes.Assets.at("js/jquery.cleditor.min.js")"></script>
+	<!-- notification plugin -->
+	<script src="@routes.Assets.at("js/jquery.noty.js")"></script>
+	<!-- file manager library -->
+	<script src="@routes.Assets.at("js/jquery.elfinder.min.js")"></script>
+	<!-- star rating plugin -->
+	<script src="@routes.Assets.at("js/jquery.raty.min.js")"></script>
+	<!-- for iOS style toggle switch -->
+	<script src="@routes.Assets.at("js/jquery.iphone.toggle.js")"></script>
+	<!-- autogrowing textarea plugin -->
+	<script src="@routes.Assets.at("js/jquery.autogrow-textarea.js")"></script>
+	<!-- multiple file upload plugin -->
+	<script src="@routes.Assets.at("js/jquery.uploadify-3.1.min.js")"></script>
+	<script src="@routes.Assets.at("js/jquery.history.js")"></script>
+	<!-- application script for Charisma demo -->
+	<script src="@routes.Assets.at("js/charisma.js")"></script>
+	<script type="text/javascript" charset="utf-8">
+        // Called for each Comet message
+        var logined = function(time) {
+        	$.post("@routes.Application.authenticate(hash)", 
+        			function(data){
+        		window.location.replace("@routes.Sources.sources()");
+        	});
+        }
+    </script>
+    
+    <iframe id="comet" src="@routes.Application.comet(hash)" width=0 height=0 style="hidden" frameborder=0 marginheight=0 marginwidth=0></iframe>
+	<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-38881743-2']);
+  _gaq.push(['_setDomainName', 'habits4.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>	
+</body>
+</html>
+
+

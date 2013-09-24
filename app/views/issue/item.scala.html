@@ -1,0 +1,11 @@
+@(issue: IssueModel)
+
+<tr class="issue" data-issue="@issue.id">
+  <td><a class="name" href="@routes.Issues.images(issue.id)">@issue.name
+  </a> (@issue.imageAmount)</td>
+  <td class="center">@issue.createdAt.format("yyyy-MM-dd")</td>
+  <td class="action">
+  	<span class="delete" style="cursor: pointer;" href="@routes.Issues.deleteIssue(issue.id)">删除</span>
+  	<span class="loader" style="display: none">Loading</span>
+  </td>                                       
+</tr>

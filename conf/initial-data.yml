@@ -1,0 +1,68 @@
+
+# Users
+      
+users:
+
+    - !!models.User
+        email:      vncntkarl2@gmail.com
+        name:       admin
+        password:   admin
+        validEndDate:   2015-12-30
+    
+# Sources
+
+sources:
+
+    - !!models.SourceModel
+        id:         1
+        name:       toutoulu
+        url:               http://www.toutoulu.com/html/tupian/qingchunweimei/index_$page$.html
+        postUrlPattern:      /qingchunweimei/
+        deepLevel:   1
+        tag:         qingchunweimei
+        beginWord:
+        endWord:
+        postBeginWord:
+        postEndWord:
+        isShare:      true
+        isIncludeNextPage:      false
+        nextPageKeyword:
+        imageType:      all
+        isIncludeImageInSite:   true
+        minWidth:      100
+        minHeight:     100
+        isReadOnly:    false
+        plugin:
+        encode:     gb2312
+        createdAt:
+        subscribeAmount:  0
+        rate:             3
+        createdBy:   !!models.User
+               email: vncntkarl2@gmail.com
+    - !!models.SourceModel
+        id:         2
+        name:       ooxxpic
+        url:               http://www.ooxxpic.com/category/boobs/
+        postUrlPattern:      /boobs/
+        deepLevel:   1
+        tag:         boobs
+        beginWord:
+        endWord:
+        postBeginWord:
+        postEndWord:
+        isShare:      true
+        isIncludeNextPage:      false
+        nextPageKeyword:
+        imageType:      all
+        isIncludeImageInSite:   true
+        minWidth:      100
+        minHeight:     100
+        isReadOnly:    false
+        plugin:
+        encode:     utf-8
+        createdAt:
+        subscribeAmount:  0
+        rate:             3
+        createdBy:   !!models.User
+               email: vncntkarl2@gmail.com
+               

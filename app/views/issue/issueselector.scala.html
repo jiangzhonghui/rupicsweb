@@ -1,0 +1,14 @@
+@(issues: List[IssueModel])
+<select data-placeholder="选择导入的专辑" id="issueSelector" data-rel="chosen">
+										<option value=""></option>
+				@issues.groupBy(_.category).map {
+                    case (category, issues) => {
+                        <optgroup label="@category.name">
+                        @issues.map { issue =>
+            <option value="@issue.id">@issue.name</option>
+        }
+							
+						</optgroup>
+                    }
+                }
+</select>

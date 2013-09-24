@@ -1,0 +1,8 @@
+@(category: CategoryModel)
+
+<li data-category="@category.id"><a class="ajax-link" href="#@routes.Posts.index(category.id, 1)">
+            <i class="icon-picture"></i><span class="hidden-tablet">
+            @category.name
+                </span>
+                </a>
+            </li>

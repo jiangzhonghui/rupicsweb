@@ -1,0 +1,61 @@
+@(category : CategoryModel, issues : List[IssueModel], page : Long)
+
+<div>
+				<ul class="breadcrumb">
+					<li>
+						<a href="/">首页</a> <span class="divider">/</span>
+						@if(category != null){
+						<a href="@routes.Categories.editCategory(category.id)"><i class="icon-edit"></i>@category.name</a>
+						}
+					</li>
+				</ul>
+			</div>
+
+			<div class="row-fluid sortable">
+				<div class="box span5">
+					<div class="box-header well" data-original-title>
+						<h2><i class="icon-th"></i> 专辑列表</h2>
+						<div class="box-icon">
+							<a id="addissue" data-category="@category.id" href="#"><span class="icon icon-add"/></a>
+						</div>
+					</div>
+					<div class="box-content">
+                  	<table class="table table-striped">
+							  <thead>
+								  <tr>
+									  <th>专辑名称</th>
+									  <th>更新日期</th>
+									  <th>操作</th>                                          
+								  </tr>
+							  </thead>   
+							  <tbody id="issues">
+							  @issues.map { issue =>
+			                        @views.html.issue.item(issue)
+			                    }
+							  </tbody>
+						 </table>         
+						 <div class="pagination pagination-centered">
+						  <ul>
+							  @if(page > 1){
+								<li><a class="nav_page" page="@page-1" href="@routes.Issues.index(category.id, page-1)">Prev</a></li>
+								}else{
+								<li><a href="#">前一页</a></li>
+								}
+								<li class="active">
+								  <a href="#">@page</a>
+								</li>
+								<li><a class="nav_page" page="@page+1" class="nav_page" href="@routes.Issues.index(category.id, page+1)">@(page+1)</a></li>
+								<li><a class="nav_page" page="@page+2" href="@routes.Issues.index(category.id, page+2)">@(page+2)</a></li>
+								<li><a class="nav_page" page="@page+3" href="@routes.Issues.index(category.id, page+3)">@(page+3)</a></li>
+								<li><a class="nav_page" page="@page+1" href="@routes.Issues.index(category.id, page+1)">下一页</a></li>
+						  </ul>
+						</div>                 
+                  </div>
+				</div><!--/span-->
+				<div id="images" class="box span7">
+				</div><!--/span-->
+			
+			</div><!--/row-->                  
+                  </div>
+				</div>
+			</div><!--/row-->

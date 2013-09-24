@@ -1,0 +1,88 @@
+@(source : SourceModel, posts : List[PostModel], page : Long)
+
+<div>
+				<ul class="breadcrumb">
+					<li>
+						<a href="/">Home</a> <span class="divider">/</span>
+						@if(source != null){
+						<a href="@routes.Sources.editSource(source.id)"><i class="icon-edit"></i>@source.name</a>
+						}else{
+						My Favorites
+						}
+					</li>
+				</ul>
+			</div>
+
+			<div class="row-fluid sortable">
+				<div class="box span5">
+					<div class="box-header well" data-original-title>
+						<h2><i class="icon-th"></i> 帖子列表</h2>
+						<div class="box-icon">
+							<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+						</div>
+					</div>
+					<div class="box-content">
+                  	<table class="table table-striped">
+							  <thead>
+								  <tr>
+									  <th>标题</th>
+									  <th>创建时间</th>
+									  <th>状态</th>                                          
+								  </tr>
+							  </thead>   
+							  <tbody id="posts">
+							  @posts.map { post =>
+                        <tr class="post" data-post="@post.id">
+									<td><a class="ajax-link" href="@routes.Posts.images(post.id)">@post.name;(@post.imageAmount)</a> </td>
+									<td class="center">@post.createdAt.format("yyyy-MM-dd")</td>
+									<td class="favorite">
+									@if(post.isFavorite){
+										<span class="label label-success" style="cursor: pointer;">收藏</span>
+										}else{
+										<span class="label" style="cursor: pointer;">收藏</span>
+										}
+									</td>                                       
+								</tr>
+                    }
+							  </tbody>
+						 </table>         
+						 <div class="pagination pagination-centered">
+						  <ul>
+						  @if(source != null){
+							  @if(page > 1){
+								<li><a class="nav_page" page="@page-1" href="@routes.Posts.index(source.id, page-1)">前一页</a></li>
+								}else{
+								<li><a href="#">Prev</a></li>
+								}
+								<li class="active">
+								  <a href="#">@page</a>
+								</li>
+								<li><a class="nav_page" page="@page+1" class="nav_page" href="@routes.Posts.index(source.id, page+1)">@(page+1)</a></li>
+								<li><a class="nav_page" page="@page+2" href="@routes.Posts.index(source.id, page+2)">@(page+2)</a></li>
+								<li><a class="nav_page" page="@page+3" href="@routes.Posts.index(source.id, page+3)">@(page+3)</a></li>
+								<li><a class="nav_page" page="@page+1" href="@routes.Posts.index(source.id, page+1)">Next</a></li>
+							}else{
+								@if(page > 1){
+								<li><a class="nav_page" page="@page-1" href="@routes.Posts.myfavorite(page-1)">前一页</a></li>
+								}else{
+								<li><a href="#">Prev</a></li>
+								}
+								<li class="active">
+								  <a href="#">@page</a>
+								</li>
+								<li><a class="nav_page" page="@page+1" class="nav_page" href="@routes.Posts.myfavorite(page+1)">@(page+1)</a></li>
+								<li><a class="nav_page" page="@page+2" href="@routes.Posts.myfavorite(page+2)">@(page+2)</a></li>
+								<li><a class="nav_page" page="@page+3" href="@routes.Posts.myfavorite(page+3)">@(page+3)</a></li>
+								<li><a class="nav_page" page="@page+1" href="@routes.Posts.myfavorite(page+1)">后一页</a></li>
+							}
+						  </ul>
+						</div>                 
+                  </div>
+				</div><!--/span-->
+				<div id="images" class="box span7">
+				</div><!--/span-->
+			
+			</div><!--/row-->                  
+                  </div>
+				</div>
+			</div><!--/row-->

@@ -1,0 +1,121 @@
+@(categories: List[CategoryModel], sources: List[SourceModel], sourceForm: Form[SourceModel])
+
+@import helper._
+
+@textField(field: Field, title: String) = {
+    @input(field, '_label -> title, '_class -> "control-label") { (id, name, value, _) =>
+    <div class="controls">
+	        <input class="input-xlarge focused" type="text" name="@name" value="@value"> 
+								</div>
+
+    }
+}
+
+@main(categories, sources){
+
+@if(sourceForm != null){
+    <div>
+				<ul class="breadcrumb">
+					<li>
+						<a href="/">首页</a> <span class="divider">/</span><a href="#">
+						@if(sourceForm("name").value != null){
+					    	@sourceForm("name").value
+					    }else{
+					    	新的图源
+					    }</a>
+					</li>
+				</ul>
+			</div>
+    
+    
+    <div class="row-fluid">
+				<div class="box span12">
+					<div class="box-header well" data-original-title>
+						<h2><i class="icon-edit"></i> 
+						@if(sourceForm("name").value != null){
+					    	图源: @sourceForm("name").value
+					    }else{
+					    	添加一个新的图源
+					    }</h2>
+						<div class="box-icon">
+							<a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
+							<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+							<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+						</div>
+					</div>
+					<div class="row-fluid show-grid">
+					@form(routes.Sources.saveSource(), 'class -> "form-horizontal") {
+						
+							<fieldset>
+							@if(sourceForm("id").value != null && sourceForm("id").value.toInt > 0){
+					    	<input type="hidden" name="@sourceForm("id").name" value="@sourceForm("id").value">
+					    	<input type="hidden" name="@sourceForm("createdAt").name" value="@sourceForm("createdAt").value">
+					    	<input type="hidden" name="@sourceForm("subscribeAmount").name" value="@sourceForm("subscribeAmount").value">
+					    	<input type="hidden" name="@sourceForm("rate").name" value="@sourceForm("rate").value">
+					    }else{
+					    	<input type="hidden" name="@sourceForm("createdAt").name" value="@Calendar.getInstance().getTime()">
+					    }
+                            <div class="span5 well">
+								<div>
+									<h2>基础信息</h2>
+									@views.html.form.text(  sourceForm("name"),  '_showConstraints -> true,  '_label -> "名称")
+			                        @views.html.form.text(  sourceForm("url"),  '_showConstraints -> true,  '_label -> "URL")
+			                        @views.html.form.text(  sourceForm("tag"),  '_showConstraints -> true,  '_label -> "标签")
+			                        @views.html.form.text(  sourceForm("beginWord"),  '_showConstraints -> true,  '_label -> "开始字符")
+			                        @views.html.form.text(  sourceForm("endWord"),  '_showConstraints -> true,  '_label -> "结束字符")
+			                        @views.html.form.text(  sourceForm("isShare"),  '_showConstraints -> true,  '_label -> "是否分享")    
+								</div>
+							</div><!--/span-->
+			                <div class="span5 well">
+								<div>
+									<h2>扩展信息</h2>
+									@views.html.form.text(  sourceForm("language"),  '_showConstraints -> true,  '_label -> "页面语言")
+			                        @views.html.form.text(  sourceForm("deepLevel"),  '_showConstraints -> true,  '_label -> "论坛/单页(1/0)")
+									@views.html.form.text(  sourceForm("encode"),  '_showConstraints -> true,  '_label -> "页面编码")
+								</div>
+							</div><!--/span-->
+			                <div class="span5 well">
+								<div>
+									<h2>帖子过滤器</h2>
+									@views.html.form.text(  sourceForm("postUrlPattern"),  '_showConstraints -> true,  '_label -> "帖子 URL模式")
+			                        @views.html.form.text(  sourceForm("postBeginWord"),  '_showConstraints -> true,  '_label -> "帖子开始字符")
+			                        @views.html.form.text(  sourceForm("postEndWord"),  '_showConstraints -> true,  '_label -> "帖子结束字符")
+			                        @views.html.form.text(  sourceForm("isIncludeNextPage"),  '_showConstraints -> true,  '_label -> "是否包括帖子的下一页")
+			                        @views.html.form.text(  sourceForm("nextPageKeyword"),  '_showConstraints -> true,  '_label -> "下一页链接的关键字")
+								</div>
+							</div><!--/span-->
+			                <div class="span5 well">
+								<div>
+									<h2>图片过滤器</h2>
+									@views.html.form.text(  sourceForm("isIncludeImageInSite"),  '_showConstraints -> true,  '_label -> "是否包括本站内的图片")
+									@views.html.form.text(  sourceForm("minWidth"),  '_showConstraints -> true,  '_label -> "最小宽度")
+			                        @views.html.form.text(  sourceForm("minHeight"),  '_showConstraints -> true,  '_label -> "最小高度")
+			                        @views.html.form.text(  sourceForm("imageType"),  '_showConstraints -> true,  '_label -> "图片类型")
+			                        @views.html.form.text(  sourceForm("plugin"),  '_showConstraints -> true,  '_label -> "插件")
+								</div>
+							</div><!--/span-->
+							
+							<div class="span10 well">
+								<div>
+								<button type="submit" class="btn btn-primary">保存</button>
+								@if(sourceForm("id").value != null && sourceForm("id").value.toInt > 0){
+								<a id="deleteSource" class="btn btn-danger" href="@routes.Sources.deleteSource(sourceForm("id").value.toLong)">
+										<i class="icon-trash icon-white"></i> 
+										删除
+									</a>
+									}
+							  </div>
+							</div><!--/span-->
+                            
+							</fieldset>
+						  }
+					
+					</div>
+				</div><!--/span-->
+			
+			</div><!--/row-->
+			
+    
+        
+    }
+			}

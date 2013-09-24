@@ -1,0 +1,270 @@
+@(categories: List[CategoryModel],sources: List[SourceModel])(posts : Html)
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Ru Pics</title>
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+        <meta charset="utf-8">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="PIC Browser - quickly view massive pics">
+	<meta name="author" content="Vencent Karl">
+
+	<!-- The styles -->
+	<link href="@routes.Assets.at("css/bootstrap-cerulean.css")" rel="stylesheet">
+	<style type="text/css">
+	  body {
+		padding-bottom: 40px;
+	  }
+	  .sidebar-nav {
+		padding: 9px 0;
+	  }
+	</style>
+	<link href="@routes.Assets.at("css/bootstrap-responsive.css")" rel="stylesheet">
+	<link href="@routes.Assets.at("css/charisma-app.css")" rel="stylesheet">
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+  	<link href="@routes.Assets.at("css/fullcalendar.css")" rel="stylesheet">
+	<link href="@routes.Assets.at("css/fullcalendar.print.css")" rel="stylesheet"  media="print">
+	<link href="@routes.Assets.at("css/chosen.css")" rel="stylesheet">
+	<link href="@routes.Assets.at("css/uniform.default.css")" rel="stylesheet">
+	<link href="@routes.Assets.at("css/colorbox.css")" rel="stylesheet">
+	<link href="@routes.Assets.at("css/jquery.cleditor.css")" rel="stylesheet">
+	<link href="@routes.Assets.at("css/jquery.noty.css")" rel="stylesheet">
+	<link href="@routes.Assets.at("css/noty_theme_default.css")" rel="stylesheet">
+	<link href="@routes.Assets.at("css/elfinder.min.css")" rel="stylesheet">
+	<link href="@routes.Assets.at("css/elfinder.theme.css")" rel="stylesheet">
+	<link href="@routes.Assets.at("css/jquery.iphone.toggle.css")" rel="stylesheet">
+	<link href="@routes.Assets.at("css/opa-icons.css")" rel="stylesheet">
+	<link href="@routes.Assets.at("css/uploadify.css")" rel="stylesheet">
+
+	<!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+	  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+	<!-- The fav icon -->
+	<link rel="shortcut icon" href="img/favicon.ico">
+    </head>
+    <body>
+    <!-- topbar starts -->
+	<div class="navbar">
+		<div class="navbar-inner">
+			<div class="container-fluid">
+				<p><a class="btn btn-navbar" data-toggle="collapse" data-target=".top-nav.nav-collapse,.sidebar-nav.nav-collapse">
+				  <span class="icon-bar"></span>
+				  <span class="icon-bar"></span>
+				  <span class="icon-bar"></span>
+			    </a>
+			  <span>乳此动人</span></a>
+				  
+				  <!-- theme selector starts -->			  </p>
+				
+				
+				<!-- user dropdown starts -->
+				<div class="btn-group pull-right" >
+					<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+						<i class="icon-user"></i><span class="hidden-phone"> admin</span>
+						<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="/">Profile</a></li>
+						<li class="divider"></li>
+						<li><a href="/logout">Logout</a></li>
+					</ul>
+				</div>
+				<!-- user dropdown ends -->
+				
+				<!--/.nav-collapse -->
+			</div>
+		</div>
+	</div>
+	<!-- topbar ends -->
+		<div class="container-fluid">
+		<div class="row-fluid">
+				
+			<!-- left menu starts -->
+			<div class="span2 main-menu-span">
+				<div class="well nav-collapse sidebar-nav">
+					<ul id="categories" class="nav nav-tabs nav-stacked main-menu">
+						
+    <li class="nav-header hidden-tablet">分类(@categories.size())</li>
+    		<li><a class="name" href="@routes.Categories.createCategory()">
+	            <i class="icon-edit"></i>
+	            <span class="hidden-tablet">
+	            添加分类
+                </span></a>
+            </li>
+            
+				@categories.map { category =>
+            		@views.html.category.item(category)
+				}
+					</ul>
+                    <ul id="sources" class="nav nav-tabs nav-stacked main-menu">
+						
+    <li class="nav-header hidden-tablet">图源(@sources.size())</li>
+    		<li><a class="name" href="@routes.Sources.createSource()">
+	            <i class="icon-edit"></i>
+	            <span class="hidden-tablet">
+	            添加新图源
+                </span></a>
+            </li>
+            
+        @sources.map { source =>
+            @views.html.source.item(source)
+				}		
+					</ul>
+				</div><!--/.well -->
+			</div><!--/span-->
+			<!-- left menu ends -->
+			
+			<noscript>
+				<div class="alert alert-block span10">
+					<h4 class="alert-heading">Warning!</h4>
+					<p>You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a> enabled to use this site.</p>
+				</div>
+			</noscript>
+			
+			<div  class="span10">
+				<!-- content starts -->
+				<section id="content">
+				@posts
+				</section>
+			</div>
+		<div class="modal hide fade" id="myModal">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">×</button>
+				<h3>Settings</h3>
+			</div>
+			<div class="modal-body">
+				<p>Here settings can be configured...</p>
+			</div>
+			<div class="modal-footer">
+				<a href="#" class="btn" data-dismiss="modal">Close</a>
+				<a href="#" class="btn btn-primary">Save changes</a>
+			</div>
+		</div>
+
+		<footer>
+			<p class="pull-left">&copy; <a href="#" target="_blank">Vencent Karl</a> 2013</p>
+		</footer>
+		
+	</div><!--/.fluid-container-->
+	
+    <!-- external javascript
+	================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+
+	<!-- jQuery -->
+	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.1.1.min.js"></script>
+	<!-- jQuery UI -->
+  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+	<!-- transition / effect library -->
+	<script src="@routes.Assets.at("js/bootstrap-transition.js")"></script>
+	<!-- alert enhancer library -->
+	<script src="@routes.Assets.at("js/bootstrap-alert.js")"></script>
+	<!-- modal / dialog library -->
+	<script src="@routes.Assets.at("js/bootstrap-modal.js")"></script>
+	<!-- custom dropdown library -->
+	<script src="@routes.Assets.at("js/bootstrap-dropdown.js")"></script>
+	<!-- scrolspy library -->
+	<script src="@routes.Assets.at("js/bootstrap-scrollspy.js")"></script>
+	<!-- library for creating tabs -->
+	<script src="@routes.Assets.at("js/bootstrap-tab.js")"></script>
+	<!-- library for advanced tooltip -->
+	<script src="@routes.Assets.at("js/bootstrap-tooltip.js")"></script>
+	<!-- popover effect library -->
+	<script src="@routes.Assets.at("js/bootstrap-popover.js")"></script>
+	<!-- button enhancer library -->
+	<script src="@routes.Assets.at("js/bootstrap-button.js")"></script>
+	<!-- accordion library (optional, not used in demo) -->
+	<script src="@routes.Assets.at("js/bootstrap-collapse.js")"></script>
+	<!-- carousel slideshow library (optional, not used in demo) -->
+	<script src="@routes.Assets.at("js/bootstrap-carousel.js")"></script>
+	<!-- autocomplete library -->
+	<script src="@routes.Assets.at("js/bootstrap-typeahead.js")"></script>
+	<!-- tour library -->
+	<script src="@routes.Assets.at("js/bootstrap-tour.js")"></script>
+	<!-- library for cookie management -->
+	<script src="@routes.Assets.at("js/jquery.cookie.js")"></script>
+	<!-- calander plugin -->
+	<script src="@routes.Assets.at("js/fullcalendar.min.js")"></script>
+	<!-- data table plugin -->
+	<script src="@routes.Assets.at("js/jquery.dataTables.min.js")"></script>
+
+	<!-- chart libraries start 
+	<script src="@routes.Assets.at("js/excanvas.js")"></script>
+	<script src="@routes.Assets.at("js/jquery.flot.min.js")"></script>
+	<script src="@routes.Assets.at("js/jquery.flot.pie.min.js")"></script>
+	<script src="@routes.Assets.at("js/jquery.flot.stack.js")"></script>
+	<script src="@routes.Assets.at("js/jquery.flot.resize.min.js")"></script>
+	chart libraries end -->
+
+	<!-- select or dropdown enhancer -->
+	<script src="@routes.Assets.at("js/jquery.chosen.min.js")"></script>
+	<!-- checkbox, radio, and file input styler -->
+	<script src="@routes.Assets.at("js/jquery.uniform.min.js")"></script>
+	<!-- plugin for gallery image view 
+	<script src="@routes.Assets.at("js/jquery.colorbox.min.js")"></script>-->
+	<!-- rich text editor library -->
+	<script src="@routes.Assets.at("js/jquery.cleditor.min.js")"></script>
+	<!-- notification plugin -->
+	<script src="@routes.Assets.at("js/jquery.noty.js")"></script>
+	<!-- file manager library -->
+	<script src="@routes.Assets.at("js/jquery.elfinder.min.js")"></script>
+	<!-- star rating plugin -->
+	<script src="@routes.Assets.at("js/jquery.raty.min.js")"></script>
+	<!-- for iOS style toggle switch -->
+	<script src="@routes.Assets.at("js/jquery.iphone.toggle.js")"></script>
+	<!-- autogrowing textarea plugin -->
+	<script src="@routes.Assets.at("js/jquery.autogrow-textarea.js")"></script>
+	<!-- multiple file upload plugin -->
+	<script src="@routes.Assets.at("js/jquery.uploadify-3.1.min.js")"></script>
+	<script src="@routes.Assets.at("js/jquery.history.js")"></script>
+	<!-- files upload -->
+	<script src="@routes.Assets.at("js/vendor/jquery.ui.widget.js")"></script>
+	<script src="@routes.Assets.at("js/jquery.iframe-transport.js")"></script>
+	<script src="@routes.Assets.at("js/jquery.fileupload.js")"></script>
+	<script src="@routes.Assets.at("js/cors/jquery.xdr-transport.js")"></script>
+	<!-- pinterest like component 
+	<script src="@routes.Assets.at("js/jquery.imagesloaded.js")"></script>-->
+	<script src="@routes.Assets.at("js/jquery.wookmark.min.js")"></script>
+	<!-- application script for Charisma demo 
+	<script src="@routes.Assets.at("js/charisma.js")"></script>-->
+	<script type="text/javascript" src="@routes.Assets.at("js/underscore-min.js")"></script>
+<script type="text/javascript" src="@routes.Assets.at("js/backbone-min.js")"></script>
+	<script type="text/javascript" src="@routes.Assets.at("js/main.js")"></script>
+	<script type="text/javascript" src="@routes.Application.javascriptRoutes()"></script>
+	<!-- Add mousewheel plugin (this is optional) -->
+	<script type="text/javascript" src="@routes.Assets.at("js/jquery.mousewheel-3.0.6.pack.js")"></script>
+
+	<!-- Add fancyBox main JS and CSS files -->
+	<script type="text/javascript" src="@routes.Assets.at("fancybox/jquery.fancybox.js?v=2.1.4")"></script>
+	<link rel="stylesheet" type="text/css" href="@routes.Assets.at("fancybox/jquery.fancybox.css?v=2.1.4")" media="screen" />
+
+	<!-- Add Button helper (this is optional) -->
+	<link rel="stylesheet" type="text/css" href="@routes.Assets.at("fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5")" />
+	<script type="text/javascript" src="@routes.Assets.at("fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5")"></script>
+
+	<!-- Add Thumbnail helper (this is optional) -->
+	<link rel="stylesheet" type="text/css" href="@routes.Assets.at("fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7")" />
+	<script type="text/javascript" src="@routes.Assets.at("fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7")"></script>
+
+	<!-- Add Media helper (this is optional) -->
+	<script type="text/javascript" src="@routes.Assets.at("fancybox/helpers/jquery.fancybox-media.js?v=1.0.5")"></script>
+	<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-38881743-2']);
+  _gaq.push(['_setDomainName', 'habits4.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+    </body>
+</html>

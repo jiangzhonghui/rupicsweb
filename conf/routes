@@ -1,0 +1,66 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                           controllers.Sources.sources()
+
+# Home page
+#GET     /profile                           controllers.Application.profile()
+
+# Authentication
+GET     /login                              controllers.Application.login()
+GET     /qrcode                       controllers.Application.qrcode(hash : String)
+#GET     /hash                               controllers.Application.hash(hash : String)
+GET     /comet                      controllers.Application.comet(hash : String)
+POST    /login                              controllers.Application.authenticate(hash : String ?= null)
+GET     /logout                             controllers.Application.logout()
+
+# Sources          
+GET     /sources/create             controllers.Sources.createSource()
+GET     /sources/:id                controllers.Sources.editSource(id: Long)
+POST    /sources                  	controllers.Sources.saveSource()
+GET    /sources/:id/delete       				controllers.Sources.deleteSource(id: Long)
+POST    /sources/:id/download                  	controllers.Sources.download(id: Long)
+
+# Post
+GET     /sources/:sid/posts/:page           controllers.Posts.index(sid: Long, page: Long)
+GET     /favorite/:page                     controllers.Posts.myfavorite(page: Long)
+PUT     /posts/:pid/favorite                controllers.Posts.favorite(pid: Long)
+
+# Categories          
+GET     /categories/create             controllers.Categories.createCategory()
+GET     /categories/:id                controllers.Categories.editCategory(id: Long)
+POST    /categories                  	controllers.Categories.saveCategory()
+DELETE    /categories/:id       				controllers.Categories.deleteCategory(id: Long)
+
+# Issues          
+GET     /categories/:cid/issues/:page           controllers.Issues.index(cid: Long, page: Long)
+GET     /issues/showselector                            controllers.Issues.showIssueSelector()
+POST     /categories/:cid/issues/create             controllers.Issues.addIssue(cid: Long)
+PUT    /issues/:iid                  	controllers.Issues.renameIssue(iid: Long, newName: String)
+DELETE    /issues/:id       				controllers.Issues.deleteIssue(id: Long)
+
+#Image
+GET     /posts/:pid/images                  controllers.Posts.images(pid: Long)
+GET     /issues/:iid/images                  controllers.Issues.images(iid: Long)
+GET     /sources/:sid/images/:page                  controllers.Sources.images(sid: Long, page: Long)
+DELETE  /images/deleteImages                  controllers.Images.deleteImages(images: java.util.List[java.lang.Long])
+POST    /images/importImages                  controllers.Images.importImages(images: java.util.List[java.lang.Long], issue: java.lang.Long)
+POST    /images/uploadImages                  controllers.Images.uploadImages(iid: Long)
+POST    /images/sortImages                  controllers.Images.sortImages(images: java.util.List[java.lang.Long], issue: java.lang.Long)
+GET     /images/show/:name                  controllers.Images.showImages(name: String)
+
+#service for mobile
+GET    /service/categories                  	controllers.Services.getCategories()
+GET    /service/categories/:cid/issues/:page           controllers.Services.getIssuesByCategory(cid: Long, page: Long)
+GET    /service/issues/:iid/images                  controllers.Services.getImagesByIssue(iid: Long)
+GET    /service/quicklogin                  controllers.Services.logindirct(sid: String, desc: String)
+#POST    /service/login                  controllers.Services.login(sid: String, desc: String)
+POST    /service/user/limitkbytes/sub                  controllers.Services.addUserConsumedKbytes(sid: String, size: Long)
+
+# Javascript routing
+GET     /assets/js/routes          controllers.Application.javascriptRoutes()
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)

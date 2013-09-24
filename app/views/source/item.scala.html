@@ -1,0 +1,14 @@
+@(source: SourceModel)
+
+<li data-source="@source.id">
+            <i class="icon-picture"></i><span class="hidden-tablet">
+            <a class="ajax-link" href="#@routes.Posts.index(source.id, 1)">@source.name</a>
+            <a class="allinone" href="#@routes.Sources.images(source.id, 1)">AllInOne</a>
+            <div class="box-icon">
+            <a class="downloadsource" data-source="@source.id" href="#@routes.Sources.download(source.id)">
+  	<span class="icon  icon-download" ></span>
+  	</a><span class="loader" style="display: none">Loading</span></div>
+                </span>
+                
+                
+            </li>

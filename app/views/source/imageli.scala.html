@@ -1,0 +1,9 @@
+@(images : List[ImageModel])
+@if(images != null){
+                        @images.map { image =>
+                        <li id="@image.id" class="thumbnail">
+                                    <input class="importSelector" type="checkbox" id="chk@image.id" value="@image.id" @if(image.issue != null){ checked="true"}>@if(image.issue != null){ @image.issue.name - @image.issueOrder}</input> 
+                                <a class="fancybox" data-fancybox-group="gallery" title="@image.id" href="@image.url"><img class="grayscale" src="@image.url" alt="@image.id"></a>
+                            </li>
+                    }
+                    }

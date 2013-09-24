@@ -1,0 +1,27 @@
+@(images : List[ImageModel], title : String, sourceId : Long)
+                    <div class="box-header well" data-original-title>
+                        <h2><i class="icon-th"></i> 图片列表 - @title</h2>
+                        <div class="box-icon">
+                            <a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
+                            <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+                            <a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+                        </div>
+                    </div>
+                    <div id="images-container" class="box-content">
+                      <p class="center">
+                    <div class="control-group">
+                    <label class="checkbox inline">
+                                    <input id="selectAllImages" type="checkbox" id="selectall" value="selectall"> 全选
+                                  </label>
+                            <button id="deleteImages" type="submit" class="btn btn-primary">删除</button>
+                                <div class="controls">
+								<div id="issue-selector"></div>
+								  <button id="importImages" type="submit" class="btn btn-primary">导入专辑</button>
+								</div>
+                              </div>
+                        </p>
+                        <br/>
+                        <ul id="sortable" class="thumbnails gallery" data-source="@sourceId"  style="position: relative;padding: 0 0 0 40px;">
+                            @views.html.source.imageli(images)
+                                                    </ul>
+                    </div>
