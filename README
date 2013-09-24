@@ -4,7 +4,7 @@ rupicsweb
 A backend administrator platform that provides image issue functions.
 
 这个后台管理工具专用于从不同图片源抓取图片，并发布为专辑，提供给手机端浏览，手机端浏览工具:
-[Rupicsapp](../../../Rupicsapp)
+[rupicsweb](../../../Rupicsapp)
 
 ## 使用说明：
 
